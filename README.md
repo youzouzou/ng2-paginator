@@ -1,27 +1,55 @@
-# Ng2demo
+使用[angular-cli](https://github.com/angular/angular-cli)搭建demo项目
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.32.3.
+分页组件代码：page.html，page.ts
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+（1）在项目中引入分页组件
+```
+import { Page }   from './page/page';
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+declarations: [
+    Page
+  ],
+```
+(2)在页面中使用分页组件
+```
+<!--分页组件参数：pageSize,totalNum,curPage,totalPage-->
+<page-template [pageParams]="{pageSize:20,totalNum:100,curPage:1,totalPage:5}" (changeCurPage)="getPageData($event)"></page-template>
+```
+```
+import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+@Component({
+  selector: 'demo',
+  templateUrl: './demo.html'
+})
+export class Demo {
+  public params; // 保存页面url参数
+  public totalNum = 0; // 总数据条数
+  public pageSize = 20;// 每页数据条数
+  public totalPage = 0;// 总页数
+  public curPage = 1;// 当前页码
+  constructor(location:Location) {
+    let vm = this;
+    if (vm.params) {
+      vm.params = vm.params.replace('?', '').split('&');
+      let theRequest = [];
+      for (let i = 0; i < vm.params.length; i++) {
+        theRequest[vm.params[i].split("=")[0]] = vm.params[i].split("=")[0] == 'pageNo' ? parseInt(vm.params[i].split("=")[1]) : vm.params[i].split("=")[1];
+      }
+      vm.params = theRequest;
+      if (vm.params['pageNo']) {
+        vm.curPage = vm.params['pageNo'];
+        //console.log('当前页面', vm.curPage);
+      }
+    } else {
+      vm.params = {};
+    }
+  }
+  getPageData(pageNo) {
+    let vm = this;
+    vm.curPage = pageNo;
+    console.log('触发', pageNo);
+  }
+}
+```
