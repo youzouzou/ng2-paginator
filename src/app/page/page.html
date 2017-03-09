@@ -1,0 +1,19 @@
+<!--分页组件-->
+<div class="col-md-12 text-right margin-bottom" *ngIf="pageParams.totalPage>1 && pageParams.totalNum>0">
+  <a class="pull-left text-sm">总计 {{pageParams.totalNum}} 条，第 {{pageParams.curPage}} / {{pageParams.totalPage}} 页</a>
+  <button class="btn btn-default previous" [routerLink]="['./']" [disabled]="pageParams.curPage<=5"
+          (click)="changePage(pageParams.curPage-5)" [queryParams]="{pageNo:pageParams.curPage-5}"><<</button>
+  <button class="btn btn-default next" [routerLink]="['./']" (click)="changePage(pageParams.curPage-1)"
+          [queryParams]="{pageNo:pageParams.curPage-1}" [disabled]="pageParams.curPage==1">上一页</button>
+  <button class="btn btn-default" [routerLink]="['./']" [disabled]="pageParams.curPage==page.pageNo"
+          (click)="changePage(page.pageNo)" [queryParams]="page" *ngFor="let page of getPageList(pageParams)">
+    {{page.pageNo}}
+  </button>
+  <button class="btn btn-default next" [routerLink]="['./']" (click)="changePage(pageParams.curPage-(-1))"
+          [queryParams]="{pageNo:pageParams.curPage-(-1)}" [disabled]="pageParams.curPage==pageParams.totalPage">下一页</button>
+  <button class="btn btn-default previous" [routerLink]="['./']" [disabled]="pageParams.totalPage-pageParams.curPage<=5"
+          (click)="changePage(pageParams.curPage-(-5))" [queryParams]="{pageNo:pageParams.curPage-(-5)}">>></button>
+</div>
+<div class="col-md-12 text-center text-sm text-dark-gray" *ngIf="!pageParams.totalNum">
+  空空如也
+</div>
