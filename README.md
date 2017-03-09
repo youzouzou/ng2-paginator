@@ -1,6 +1,7 @@
 使用[angular-cli](https://github.com/angular/angular-cli)搭建demo项目
 
-运行demo，下载并进入项目，npm/cnpm install安装依赖包，安装完后执行npm run start，在浏览器打开http://localhost:4200
+运行demo：
+下载并进入项目，npm/cnpm install安装依赖包，安装完后执行npm run start，在浏览器打开http://localhost:4200
 
 分页组件代码文件：page.html，page.ts
 
