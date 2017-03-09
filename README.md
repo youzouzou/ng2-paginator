@@ -1,6 +1,8 @@
 使用[angular-cli](https://github.com/angular/angular-cli)搭建demo项目
 
-分页组件代码：page.html，page.ts
+运行demo，下载并进入项目，npm/cnpm install安装依赖包，安装完后执行npm run start，在浏览器打开http://localhost:4200
+
+分页组件代码文件：page.html，page.ts
 
 （1）在项目中引入分页组件
 ```
@@ -53,3 +55,4 @@ export class Demo {
   }
 }
 ```
+ng2学习中...
