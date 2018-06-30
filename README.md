@@ -1,3 +1,7 @@
+已弃用。这个实现方式太麻烦，且有bug。
+目前在整理一个angular组件项目：https://github.com/youzouzou/ngx-admin-yzz，里面有实现分页的组件，感觉要比这个好一点点。
+
+
 使用[angular-cli](https://github.com/angular/angular-cli)搭建demo项目
 
 运行demo：
